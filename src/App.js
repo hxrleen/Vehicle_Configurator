@@ -9,7 +9,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Feedback from "./pages/Feedback";
 import Footer from "./components/Footer";
-import defaultConfig from "./pages/defaultConfig";
+import Defaultconfig from "./pages/Defaultconfig";
 import "./App.css";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/feedback" element={<Feedback />} />
-          <Route path="/defaultConfig" element={<defaultConfig />} />
+          <Route path="/Defaultconfig/:model_id" element={<Defaultconfig />} />
         </Routes>
       </div>
       <Footer />

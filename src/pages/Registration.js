@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import { Link } from "react-router-dom";
-
 export default function Registration() {
   const [formdata, setFormData] = useState({
     id: "",
@@ -65,7 +64,7 @@ export default function Registration() {
         }
 
         // Move navigate("/") here
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         console.error("An error occurred:", error);
@@ -74,37 +73,50 @@ export default function Registration() {
   };
 
   return (
-    <div className="registration-container">
-      <h1>Registration Page</h1>
-      <form className="registration-form" onSubmit={handleSubmit}>
-        <div className="column">
-          <label>Email:</label>
-          <input type="text" name="emailid" onChange={handleChange} />
-          <label>Username:</label>
-          <input type="text" name="username" onChange={handleChange} />
-          <label>Password:</label>
-          <input type="text" name="password" onChange={handleChange} />
-          <label>Company Name:</label>
-          <input type="text" name="comp_name" onChange={handleChange} />
-        </div>
-        <div className="column">
-          <label>Address:</label>
-          <input type="text" name="address" onChange={handleChange} />
-          <label>Telephone:</label>
-          <input type="text" name="telephone" onChange={handleChange} />
-          <label>Holding:</label>
-          <input type="text" name="holding" onChange={handleChange} />
-          <label>Authorized Person Name:</label>
-          <input type="text" name="name_auth_person" onChange={handleChange} />
-          <label>Designation:</label>
-          <input type="text" name="designation" onChange={handleChange} />
-          <label>Authorized Person Tel:</label>
-          <input type="text" name="auth_tel" onChange={handleChange} />
-        </div>
-        <button type="submit">Submit</button>
-        <br></br>
-        <Link to="/">Back to Home</Link>
-      </form>
+    <div className="feedback-container">
+      <div className="image-container">
+        <img
+          src="https://cdni.iconscout.com/illustration/premium/thumb/contact-us-5795988-4849052.png?f=webp"
+          alt="Feedback Image"
+          className="feedback-image"
+        />
+      </div>
+      <div className="registration-container">
+        <h1>Registration Page</h1>
+        <form className="form-group" onSubmit={handleSubmit}>
+          <div className="column">
+            <label>Email:</label>
+            <input type="text" name="emailid" onChange={handleChange} />
+            <label>Username:</label>
+            <input type="text" name="username" onChange={handleChange} />
+            <label>Password:</label>
+            <input type="text" name="password" onChange={handleChange} />
+            <label>Company Name:</label>
+            <input type="text" name="comp_name" onChange={handleChange} />
+          </div>
+          <div className="column">
+            <label>Address:</label>
+            <input type="text" name="address" onChange={handleChange} />
+            <label>Telephone:</label>
+            <input type="text" name="telephone" onChange={handleChange} />
+            <label>Holding:</label>
+            <input type="text" name="holding" onChange={handleChange} />
+            <label>Authorized Person Name:</label>
+            <input
+              type="text"
+              name="name_auth_person"
+              onChange={handleChange}
+            />
+            <label>Designation:</label>
+            <input type="text" name="designation" onChange={handleChange} />
+            <label>Authorized Person Tel:</label>
+            <input type="text" name="auth_tel" onChange={handleChange} />
+          </div>
+          <button type="submit">Submit</button>
+          <br></br>
+          <Link to="/">Back to Home</Link>
+        </form>
+      </div>
     </div>
   );
 }

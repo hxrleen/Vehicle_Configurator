@@ -9,6 +9,7 @@ const ConfiguratorContainer = (props) => {
   const [manufacturers, setManufacturers] = useState([]);
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,13 +65,18 @@ const ConfiguratorContainer = (props) => {
     fetchModels(selectedSegment, manufacturerId);
   };
 
+  const handleQuantityChange = (event) => {
+    const newQuantity = event.target.value;
+    setQuantity(newQuantity);
+  };
+
   const handleModelChange = (event) => {
     setSelectedModel(event.target.value);
   };
 
   const handleGoButtonClick = () => {
     if (selectedModel && selectedSegment && selectedManufacturer) {
-      const url = `/defaultConfig?modelId=${selectedModel}&segmentId=${selectedSegment}&manuId=${selectedManufacturer}`;
+      const url = `/Defaultconfig/${selectedModel}`;
       navigate(url);
     } else {
       // Handle the case where one of the required values is not selected
@@ -135,6 +141,16 @@ const ConfiguratorContainer = (props) => {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="col-xs-12 col-md-3" style={{ width: "15%" }}>
+            <h3>Quantity</h3>
+            <input
+              type="number"
+              className="form-control"
+              value={quantity}
+              onChange={handleQuantityChange}
+              min="1"
+            />
           </div>
           {/* Other dropdowns */}
           <div className="col-xs-12 col-md-3">

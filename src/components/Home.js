@@ -2,21 +2,33 @@
 import React, { useState } from "react";
 import ConfiguratorContainer from "./ConfiguratorContainer";
 import "./Home.css"; // Import additional CSS file for Home page styling
+import ImageGallery from "../pages/ImageGallery";
 
 function Home() {
   const [showConfigurator, setShowConfigurator] = useState(false);
 
   const handleStartBrowsing = () => {
     setShowConfigurator(true);
+
+    // Scroll to the ConfiguratorContainer section
+    const configuratorContainer = document.getElementById(
+      "configurator-container"
+    );
+    if (configuratorContainer) {
+      configuratorContainer.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <div className="home-container">
       <div className="hero-section">
-        <img
-          src="https://www.jato.com/wp-content/uploads/MicrosoftTeams-image-34.png"
+        <video
+          src="./car.mp4"
           alt="Automotive Industry"
-          className="hero-image"
+          className="hero-video"
+          autoPlay
+          muted
+          loop
         />
         <div className="hero-overlay">
           <button
@@ -27,7 +39,13 @@ function Home() {
         </div>
       </div>
 
-      {showConfigurator && <ConfiguratorContainer />}
+      {showConfigurator && (
+        <div id="configurator-container">
+          <ConfiguratorContainer />
+        </div>
+      )}
+
+      <ImageGallery />
 
       <div className="reviews-section">
         <h2>Customer Reviews</h2>

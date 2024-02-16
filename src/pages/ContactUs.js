@@ -1,42 +1,34 @@
-import React, { useState } from "react";
-import "./Contact.css";
+import { useState } from "react";
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    comments: "",
-  });
+export default function GetInTouch() {
+  const [getdetails, setDetails] = useState();
+  const [msgBody, setMsgBody] = useState();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleOnchange = (event) => {
+    setDetails((eml) => ({ ...eml, [event.target.name]: event.target.value }));
+    setMsgBody((msg) => ({ ...msg, [event.target.name]: event.target.value }));
+    console.log(getdetails);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const sendEmail = (event) => {
+    event.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:8080/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+    console.log(JSON.stringify(getdetails));
+
+    fetch("http://localhost:8080/sendMail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(getdetails, { msgBody: msgBody.msgBody }),
+    })
+      .then((data) => {
+        console.log(data);
+        alert("Enquiry Sent");
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
       });
-
-      if (response.ok) {
-        alert("Message submitted successfully!");
-        window.location.reload(); // This will refresh the entire page
-      } else {
-        console.error("Message submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting message:", error.message);
-    }
   };
 
   return (
@@ -44,50 +36,51 @@ const ContactForm = () => {
       <div className="image-container">
         <img
           src="https://cdni.iconscout.com/illustration/premium/thumb/contact-us-5795988-4849052.png?f=webp"
-          alt="Contact Image"
+          alt="Feedback Image"
           className="feedback-image"
         />
       </div>
-      <div className="form-container">
-        <h2>Contact Us</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="comments">Message:</label>
-            <textarea
-              id="comments"
-              name="message"
-              rows="4"
-              value={formData.message}
-              onChange={handleInputChange}
-              required></textarea>
-          </div>
+      <div>
+        <h1>
+          <b>Contact Us</b>
+        </h1>
+        <form onSubmit={sendEmail}>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            require
+            onChange={handleOnchange}
+          />
+          <br />
+          <label htmlFor="email">Email</label>
+          <br />
+          <input
+            type="email"
+            name="recipient"
+            placeholder="Enter your email"
+            require
+            onChange={handleOnchange}
+          />
+          <br />
+          <br />
+
+          <label htmlFor="query">Comments</label>
+          <br />
+
+          <textarea
+            id="msgBody"
+            name="msgBody"
+            placeholder="Enter your query"
+            required
+            onChange={handleOnchange}></textarea>
+
           <button type="submit">Submit</button>
         </form>
+          
       </div>
+        
     </div>
   );
-};
-
-export default ContactForm;
+}

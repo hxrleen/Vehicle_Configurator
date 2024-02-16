@@ -44,22 +44,22 @@ const Login = () => {
     <div className="feedback-container">
       <div className="image-container">
         <img
-          src="https://peddleup.com/assets/images/bg-login.png" // Replace with the actual path to your image
+          src="https://cdni.iconscout.com/illustration/premium/thumb/contact-us-5795988-4849052.png?f=webp"
           alt="Feedback Image"
           className="feedback-image"
         />
       </div>
-      <div className="form-container">
-        <h2>Login</h2>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label>Username:</label>
-          <input type="text" name="username" onChange={handleChange} />
-          <br />
-          <label>Password:</label>
-          <input type="password" name="password" onChange={handleChange} />
-          <br />
-          <br />
-          <button type="submit">Login</button>
+      <div className="registration-container">
+        <h1>Login Page</h1>
+        <form className="form-group" onSubmit={handleSubmit}>
+          <div className="column">
+            <label>Username:</label>
+            <input type="text" name="username" onChange={handleChange} />
+            <label>Password:</label>
+            <input type="text" name="password" onChange={handleChange} />
+          </div>
+
+          <button type="submit">Submit</button>
           <br></br>
           <Link to="/">Back to Home</Link>
         </form>

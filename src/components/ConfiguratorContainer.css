@@ -69,7 +69,6 @@ select {
 
 .col-xs-12 {
   width: 100%;
-  margin-bottom: 25px; /* Add margin between dropdowns */
 }
 
 .custom-select {
@@ -87,6 +86,15 @@ select {
 .input-dropdown {
   width: 100%; /* Set the width to 100% */
   padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input {
+  width: 20%;
+  padding: 10px;
+  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
