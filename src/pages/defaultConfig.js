@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./DefaultConfiguration.css";
+import InvoiceGenerator from "./InvoiceGenerator";
 
 function Defaultconfig() {
-  const { model_id } = useParams();
+  const { model_id, quantity } = useParams();
 
   const [carDetails, setCarDetails] = useState({
     id: null,
@@ -17,7 +18,15 @@ function Defaultconfig() {
   const [standardFeatures, setStandardFeatures] = useState([]);
   const [interiorFeatures, setInteriorFeatures] = useState([]);
   const [exteriorFeatures, setExteriorFeatures] = useState([]);
+  const [showInvoice, setShowInvoice] = useState(false);
+
   const [price, setPrice] = useState(0);
+
+  const handleConfirmOrder = () => {
+    // Confirm order logic
+    alert("Order confirmed!");
+    setShowInvoice(true); // Set state to show InvoiceGenerator
+  };
 
   useEffect(() => {
     const fetchCarDetails = () => {
@@ -110,17 +119,18 @@ function Defaultconfig() {
           <h4>Price: {price}</h4>
 
           <div className="buttons">
-            <button onClick={() => console.log("Confirm clicked")}>
-              Confirm
-            </button>
+            <button onClick={handleConfirmOrder}>Confirm</button>
             <button onClick={() => console.log("Configure clicked")}>
               Configure
             </button>
 
             {/* Cancel button with Link for navigation */}
-            <Link to="/">
+            <Link to="/Home">
               <button>Cancel</button>
             </Link>
+            {showInvoice && (
+              <InvoiceGenerator orderSize={quantity} price={price} />
+            )}
           </div>
         </div>
       </div>

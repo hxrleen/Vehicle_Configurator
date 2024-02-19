@@ -16,6 +16,14 @@ const Login = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const handleSuccessfulLogin = (username) => {
+    // Set isLoggedIn to true in session storage
+    sessionStorage.setItem("isLoggedIn", true);
+    sessionStorage.setItem("username", username);
+    alert("Successfully logged in");
+    navigate("/home");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let demo = JSON.stringify(formData);
@@ -29,7 +37,8 @@ const Login = () => {
       })
       .then((data) => {
         if (data) {
-          alert("Successfully logged in");
+          handleSuccessfulLogin(formData.username);
+
           navigate("/home");
         } else {
           alert("Invalid user");

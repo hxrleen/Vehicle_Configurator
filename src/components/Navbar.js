@@ -1,10 +1,11 @@
 // Navbar.js
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css"; // Import additional CSS file for Navbar styling
 
 function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Function to determine whether to show the buttons
   const shouldShowButtons = () => {
@@ -12,6 +13,10 @@ function Navbar() {
     return !["/", "/login", "/registration", "/errorpage"].includes(
       location.pathname
     );
+  };
+  const handleLogout = () => {
+    sessionStorage.removeItem("isLoggedIn");
+    navigate("/");
   };
 
   return (
@@ -27,8 +32,18 @@ function Navbar() {
                 <Link to="/home">Home</Link>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                {sessionStorage.getItem("isLoggedIn") ? (
+                  <>
+                    <span>Welcome-{sessionStorage.getItem("username")} </span>
+                    <Link to="/" onClick={handleLogout}>
+                      -Logout
+                    </Link>
+                  </>
+                ) : (
+                  <Link to="/login">Login </Link>
+                )}
               </li>
+
               <li>
                 <Link to="/registration">Registration</Link>
               </li>

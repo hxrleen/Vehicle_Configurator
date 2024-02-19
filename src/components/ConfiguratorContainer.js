@@ -77,7 +77,7 @@ const ConfiguratorContainer = (props) => {
 
   const handleGoButtonClick = () => {
     if (selectedModel && selectedSegment && selectedManufacturer) {
-      const url = `/Defaultconfig/${selectedModel}`;
+      const url = `/Defaultconfig/${selectedModel}/${quantity}`;
       navigate(url);
     } else {
       // Handle the case where one of the required values is not selected

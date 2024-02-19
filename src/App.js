@@ -11,6 +11,7 @@ import Welcome from "./components/Welcome";
 import Feedback from "./pages/Feedback";
 import Errorpage from "./pages/Errorpage";
 import Footer from "./components/Footer";
+import InvoiceGenerator from "./pages/InvoiceGenerator";
 import Defaultconfig from "./pages/Defaultconfig";
 import "./App.css";
 import { IconName } from "react-icons/fa";
@@ -29,7 +30,11 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />\
           <Route path="/errorpage" element={<Errorpage />} />
           <Route path="/feedback" element={<Feedback />} />
-          <Route path="/Defaultconfig/:model_id" element={<Defaultconfig />} />
+          <Route
+            path="/Defaultconfig/:model_id/:quantity"
+            element={<Defaultconfig />}
+          />
+          <Route path="/InvoiceGenerator" element={<InvoiceGenerator />} />
         </Routes>
       </div>
       <Footer />
