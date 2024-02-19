@@ -137,7 +137,13 @@ function Defaultconfig() {
           </div>
         </div>
       </div>
-      {showInvoice && <InvoiceGenerator orderSize={quantity} price={price} />}
+      {showInvoice && (
+        <InvoiceGenerator
+          orderSize={quantity}
+          price={price}
+          modelname={carDetails.modelName}
+        />
+      )}
     </div>
   );
 }

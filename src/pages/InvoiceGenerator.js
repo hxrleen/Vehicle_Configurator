@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import "./InvoiceGenerator.css";
+import "jspdf-autotable";
 
-function InvoiceGenerator({ price, orderSize }) {
+function InvoiceGenerator({ price, orderSize, modelname }) {
   const [totalPrice, setTotalPrice] = useState(null);
 
   useEffect(() => {
@@ -35,20 +36,26 @@ function InvoiceGenerator({ price, orderSize }) {
       ["Order Size", orderSize],
       ["Total Price (Including Tax)", `Rs ${totalPrice} /-`],
     ];
+
+    // Customize styles
+    const styles = {
+      textColor: [0, 0, 0], // Black text color
+      lineColor: [0, 0, 0], // Black table line color
+      lineWidth: 0.5, // Table line width
+      fontStyle: "normal", // Normal font style
+      cellPadding: 2, // Padding for each cell
+    };
+
+    // Customize theme
+    const theme = "grid";
+
     doc.autoTable({
       startY: 40,
       head: [["Description", "Amount"]],
       body: tableData,
+      theme: theme,
+      styles: styles,
     });
-
-    // Styling
-    doc.setLineWidth(0.5);
-    doc.line(
-      10,
-      doc.autoTable.previous.finalY + 10,
-      200,
-      doc.autoTable.previous.finalY + 10
-    ); // Horizontal line
 
     // Footer
     doc.setFontSize(10);
@@ -80,7 +87,7 @@ function InvoiceGenerator({ price, orderSize }) {
                 <div class="invoice-title">
                   <h4 class="float-end font-size-15">
                     Invoice #DS0204{" "}
-                    <span class="badge bg-success font-size-12 ms-2">Paid</span>
+                    <span class="badge bg-success font-size-12 ms-2"></span>
                   </h4>
                   <div class="mb-4">
                     <h2 class="mb-1 text-muted">V-Conf</h2>
@@ -149,10 +156,8 @@ function InvoiceGenerator({ price, orderSize }) {
                           <th scope="row">01</th>
                           <td>
                             <div>
-                              <h5 class="text-truncate font-size-14 mb-1">
-                                Black Strap A012
-                              </h5>
-                              <p class="text-muted mb-0">Watch, Black</p>
+                              <h5 class="text-truncate font-size-14 mb-1"></h5>
+                              <p class="text-muted mb-0"> {modelname}</p>
                             </div>
                           </td>
                           <td>{price}</td>
@@ -191,15 +196,6 @@ function InvoiceGenerator({ price, orderSize }) {
                         </tr>
                       </tbody>
                     </table>
-                  </div>
-                  <div class="d-print-none mt-4">
-                    <div class="float-end">
-                      <a
-                        href="javascript:window.print()"
-                        class="btn btn-success me-1">
-                        <i class="fa fa-print"></i>
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
