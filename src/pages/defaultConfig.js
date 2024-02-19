@@ -85,55 +85,59 @@ function Defaultconfig() {
   }, [model_id]);
 
   return (
-    <div className="default-configuration">
-      <div className="car-info">
-        <img src={`/${carDetails.imagePath}`} alt="Car" className="car-image" />
-        <div className="info">
-          <h2>{`${carDetails.modelName}`}</h2>
-          <p>
-            Description of the car Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Nulla euismod ligula vel justo sodales, nec
-            tincidunt orci ultricies.
-          </p>
-          <h4>Standard Features:</h4>
-          <ul>
-            {standardFeatures.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
+    <div>
+      <div className="default-configuration">
+        <div className="car-info">
+          <img
+            src={`/${carDetails.imagePath}`}
+            alt="Car"
+            className="car-image"
+          />
+          <div className="info">
+            <h2>{`${carDetails.modelName}`}</h2>
+            <p>
+              Description of the car Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit. Nulla euismod ligula vel justo sodales, nec
+              tincidunt orci ultricies.
+            </p>
+            <h4>Standard Features:</h4>
+            <ul>
+              {standardFeatures.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
 
-          <h4>Interior Features:</h4>
-          <ul>
-            {interiorFeatures.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
+            <h4>Interior Features:</h4>
+            <ul>
+              {interiorFeatures.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
 
-          <h4>Exterior Features:</h4>
-          <ul>
-            {exteriorFeatures.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
+            <h4>Exterior Features:</h4>
+            <ul>
+              {exteriorFeatures.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
 
-          <h4>Price: {price}</h4>
+            <h4>Price: {price}</h4>
 
-          <div className="buttons">
-            <button onClick={handleConfirmOrder}>Confirm</button>
-            <button onClick={() => console.log("Configure clicked")}>
-              Configure
-            </button>
+            <div className="buttons">
+              <button onClick={handleConfirmOrder}>Confirm</button>
+              <button onClick={() => console.log("Configure clicked")}>
+                Configure
+              </button>
 
-            {/* Cancel button with Link for navigation */}
-            <Link to="/Home">
-              <button>Cancel</button>
-            </Link>
-            {showInvoice && (
-              <InvoiceGenerator orderSize={quantity} price={price} />
-            )}
+              {/* Cancel button with Link for navigation */}
+              <Link to="/Home">
+                <button>Cancel</button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+      {showInvoice && <InvoiceGenerator orderSize={quantity} price={price} />}
     </div>
   );
 }

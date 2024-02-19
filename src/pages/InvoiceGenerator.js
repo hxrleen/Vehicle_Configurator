@@ -1,6 +1,7 @@
 // InvoiceGenerator.js
 import React, { useEffect, useState } from "react";
 import jsPDF from "jspdf";
+import "./InvoiceGenerator.css";
 
 function InvoiceGenerator({ price, orderSize }) {
   const [totalPrice, setTotalPrice] = useState(null);
@@ -71,31 +72,140 @@ function InvoiceGenerator({ price, orderSize }) {
   return (
     <div style={{ fontFamily: "Arial, sans-serif" }}>
       <h1 style={{ textAlign: "center" }}>Invoice</h1>
-      <div
-        style={{
-          border: "1px solid #ccc",
-          borderRadius: "10px",
-          maxWidth: "500px",
-          margin: "0 auto",
-          padding: "20px",
-        }}>
-        <table style={{ width: "100%" }}>
-          <tbody>
-            <tr>
-              <td>Model Price:</td>
-              <td>Rs {price}</td>
-            </tr>
-            <tr>
-              <td>Order Size:</td>
-              <td>{orderSize}</td>
-            </tr>
-            {/* Add other details as needed */}
-            <tr>
-              <td>Total Price (Including Tax 10%):</td>
-              <td>Rs {totalPrice} /-</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="invoice-title">
+                  <h4 class="float-end font-size-15">
+                    Invoice #DS0204{" "}
+                    <span class="badge bg-success font-size-12 ms-2">Paid</span>
+                  </h4>
+                  <div class="mb-4">
+                    <h2 class="mb-1 text-muted">V-Conf</h2>
+                  </div>
+                  <div class="text-muted">
+                    <p class="mb-1">3184 Spruce Drive Pittsburgh, PA 15201</p>
+                    <p class="mb-1">
+                      <i class="uil uil-envelope-alt me-1"></i> xyz@987.com
+                    </p>
+                    <p>
+                      <i class="uil uil-phone me-1"></i> 012-345-6789
+                    </p>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="text-muted">
+                      <h5 class="font-size-16 mb-3">Billed To:</h5>
+                      <h5 class="font-size-15 mb-2">
+                        {sessionStorage.getItem("username")}
+                      </h5>
+                      <p class="mb-1">{sessionStorage.getItem("address")}</p>
+                      <p class="mb-1">{sessionStorage.getItem("emailid")}</p>
+                      <p>{sessionStorage.getItem("telephone")}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="text-muted text-sm-end">
+                      <div>
+                        <h5 class="font-size-15 mb-1">Invoice No:</h5>
+                        <p>#DZ0112</p>
+                      </div>
+                      <div class="mt-4">
+                        <h5 class="font-size-15 mb-1">Invoice Date:</h5>
+                        <p>20 Feb, 2024</p>
+                      </div>
+                      <div class="mt-4">
+                        <h5 class="font-size-15 mb-1">Order No:</h5>
+                        <p>#1123456</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="py-2">
+                  <h5 class="font-size-15">Order Summary</h5>
+
+                  <div class="table-responsive">
+                    <table
+                      class="table align-middle table-nowrap table-centered mb-0"
+                      style={{ width: "100%" }}>
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Item</th>
+                          <th>Price</th>
+                          <th>Quantity</th>
+                          <th class="text-end">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">01</th>
+                          <td>
+                            <div>
+                              <h5 class="text-truncate font-size-14 mb-1">
+                                Black Strap A012
+                              </h5>
+                              <p class="text-muted mb-0">Watch, Black</p>
+                            </div>
+                          </td>
+                          <td>{price}</td>
+                          <td>{orderSize}</td>
+                          <td class="text-end">{price}</td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row" colspan="4" class="border-0 text-end">
+                            Discount :
+                          </th>
+                          <td class="border-0 text-end">- Rs 00.00</td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row" colspan="4" class="border-0 text-end">
+                            Shipping Charge :
+                          </th>
+                          <td class="border-0 text-end">Rs 00.00</td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row" colspan="4" class="border-0 text-end">
+                            Tax
+                          </th>
+                          <td class="border-0 text-end">Rs {0.1 * price}</td>
+                        </tr>
+
+                        <tr>
+                          <th scope="row" colspan="4" class="border-0 text-end">
+                            Total
+                          </th>
+                          <td class="border-0 text-end">
+                            <h4 class="m-0 fw-semibold">{totalPrice}</h4>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="d-print-none mt-4">
+                    <div class="float-end">
+                      <a
+                        href="javascript:window.print()"
+                        class="btn btn-success me-1">
+                        <i class="fa fa-print"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <button
         style={{
