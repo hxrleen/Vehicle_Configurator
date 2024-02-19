@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ConfiguratorContainer.css";
 import { Link, useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 
 const ConfiguratorContainer = (props) => {
   const [segments, setSegments] = useState([]);
@@ -155,9 +156,11 @@ const ConfiguratorContainer = (props) => {
           {/* Other dropdowns */}
           <div className="col-xs-12 col-md-3">
             <button
-              className="btn btn-primary1"
+              className="btn1"
+              style={{ marginLeft: "45%" }}
               onClick={handleGoButtonClick}
               disabled={!selectedModel}>
+              <FaSearch />
               Go
             </button>
           </div>

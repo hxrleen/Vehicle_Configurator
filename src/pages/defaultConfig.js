@@ -5,12 +5,28 @@ import "./DefaultConfiguration.css";
 function Defaultconfig() {
   const { model_id } = useParams();
 
+  const [carDetails, setCarDetails] = useState({
+    id: null,
+    modelName: "",
+    price: 0,
+    segmentMaster: { id: null, name: "" },
+    mfgMaster: { id: null, name: "" },
+    imagePath: "",
+  });
+
   const [standardFeatures, setStandardFeatures] = useState([]);
   const [interiorFeatures, setInteriorFeatures] = useState([]);
   const [exteriorFeatures, setExteriorFeatures] = useState([]);
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
+    const fetchCarDetails = () => {
+      fetch(`http://localhost:8080/api/Model/${model_id}`)
+        .then((response) => response.json())
+        .then((data) => setCarDetails(data[0])) // Assuming the API returns an array with a single object
+        .catch((error) => console.error("Error fetching car details:", error));
+    };
+
     // Function to fetch standard features
     const fetchStandardFeatures = () => {
       fetch(`http://localhost:8080/api/componentbys/${model_id}`)
@@ -53,6 +69,8 @@ function Defaultconfig() {
     // Call the functions to fetch data
     fetchStandardFeatures();
     fetchInteriorFeatures();
+    fetchCarDetails();
+
     fetchExteriorFeatures();
     fetchPrice();
   }, [model_id]);
@@ -60,9 +78,9 @@ function Defaultconfig() {
   return (
     <div className="default-configuration">
       <div className="car-info">
-        <img src="/images/luxury.jpg" alt="Car" className="car-image" />
+        <img src={`/${carDetails.imagePath}`} alt="Car" className="car-image" />
         <div className="info">
-          <h2>Car Model</h2>
+          <h2>{`${carDetails.modelName}`}</h2>
           <p>
             Description of the car Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Nulla euismod ligula vel justo sodales, nec

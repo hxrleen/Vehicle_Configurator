@@ -114,7 +114,7 @@ export default function Registration() {
           </div>
           <button type="submit">Submit</button>
           <br></br>
-          <Link to="/">Back to Home</Link>
+          <Link to="/">Back</Link>
         </form>
       </div>
     </div>

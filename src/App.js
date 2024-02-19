@@ -7,10 +7,13 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
+import Welcome from "./components/Welcome";
 import Feedback from "./pages/Feedback";
+import Errorpage from "./pages/Errorpage";
 import Footer from "./components/Footer";
 import Defaultconfig from "./pages/Defaultconfig";
 import "./App.css";
+import { IconName } from "react-icons/fa";
 
 function App() {
   return (
@@ -18,11 +21,13 @@ function App() {
       <div className="app-container">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Welcome />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/contactus" element={<ContactUs />} />\
+          <Route path="/errorpage" element={<Errorpage />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/Defaultconfig/:model_id" element={<Defaultconfig />} />
         </Routes>

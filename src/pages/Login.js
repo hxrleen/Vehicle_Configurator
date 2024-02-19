@@ -30,9 +30,10 @@ const Login = () => {
       .then((data) => {
         if (data) {
           alert("Successfully logged in");
-          navigate("/welcome");
+          navigate("/home");
         } else {
           alert("Invalid user");
+          navigate("/errorpage");
         }
       })
       .catch((error) => {
@@ -61,7 +62,7 @@ const Login = () => {
 
           <button type="submit">Submit</button>
           <br></br>
-          <Link to="/">Back to Home</Link>
+          <Link to="/">Back</Link>
         </form>
       </div>
     </div>

@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import ConfiguratorContainer from "./ConfiguratorContainer";
 import "./Home.css"; // Import additional CSS file for Home page styling
-import ImageGallery from "../pages/ImageGallery";
+import ImageGallery2 from "../pages/ImageGallery2";
+import { FaCar } from "react-icons/fa";
 
 function Home() {
   const [showConfigurator, setShowConfigurator] = useState(false);
@@ -31,11 +32,14 @@ function Home() {
           loop
         />
         <div className="hero-overlay">
-          <button
-            className="start-browsing-button"
-            onClick={handleStartBrowsing}>
-            Start Browsing
-          </button>
+          <div className="btn__container">
+            <a onClick={handleStartBrowsing} href="#" className="btn">
+              <i className="fas fa-user-alt">
+                <FaCar />
+              </i>
+              <span>Browse</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -45,7 +49,7 @@ function Home() {
         </div>
       )}
 
-      <ImageGallery />
+      <ImageGallery2 />
 
       <div className="reviews-section">
         <h2>Customer Reviews</h2>
