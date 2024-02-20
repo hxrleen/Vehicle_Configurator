@@ -16,6 +16,7 @@ function Defaultconfig() {
   });
 
   const [standardFeatures, setStandardFeatures] = useState([]);
+  const [coreFeatures, setCoreFeatures] = useState([]);
   const [interiorFeatures, setInteriorFeatures] = useState([]);
   const [exteriorFeatures, setExteriorFeatures] = useState([]);
   const [showInvoice, setShowInvoice] = useState(false);
@@ -51,6 +52,17 @@ function Defaultconfig() {
           console.error("Error fetching standard features:", error)
         );
       console.log(standardFeatures);
+    };
+
+    // Function to fetch standard features
+    const fetchCoreFeatures = () => {
+      fetch(`http://localhost:8080/api/componentbyc/${model_id}`)
+        .then((response) => response.json())
+        .then((data) => setCoreFeatures(data))
+        .catch((error) =>
+          console.error("Error fetching core features:", error)
+        );
+      console.log(coreFeatures);
     };
 
     // Function to fetch interior features
@@ -89,7 +101,7 @@ function Defaultconfig() {
     fetchStandardFeatures();
     fetchInteriorFeatures();
     fetchCarDetails();
-
+    fetchCoreFeatures();
     fetchExteriorFeatures();
     fetchPrice();
   }, [model_id]);
@@ -110,6 +122,13 @@ function Defaultconfig() {
               adipiscing elit. Nulla euismod ligula vel justo sodales, nec
               tincidunt orci ultricies.
             </p>
+
+            <h4>Core Features:</h4>
+            <ul>
+              {coreFeatures.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
             <h4>Standard Features:</h4>
             <ul>
               {standardFeatures.map((feature, index) => (

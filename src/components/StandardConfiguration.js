@@ -3,10 +3,10 @@ import React from "react";
 function StandardConfiguration() {
   return (
     <div>
-      <h2>Interior Configuration</h2>
+      <h2>Standard Configuration</h2>
       <p>
-        This is the interior configuration section. Here you can select options
-        related to the interior features of the car.
+        This is the standard configuration section. Here you can select options
+        related to the standard features of the car.
       </p>
       <div>
         <label htmlFor="seats">Seats:</label>
