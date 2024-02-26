@@ -85,14 +85,6 @@ function Defaultconfig() {
         );
     };
 
-    // Function to fetch price
-    const fetchPrice = () => {
-      fetch(`http://localhost:8080/api/price/${model_id}`)
-        .then((response) => response.json())
-        .then((data) => setPrice(data))
-        .catch((error) => console.error("Error fetching price:", error));
-    };
-
     const handleConfigure = (event) => {
       navigate("/configure");
     };
@@ -103,7 +95,6 @@ function Defaultconfig() {
     fetchCarDetails();
     fetchCoreFeatures();
     fetchExteriorFeatures();
-    fetchPrice();
   }, [model_id]);
 
   return (
