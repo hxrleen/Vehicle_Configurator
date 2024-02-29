@@ -27,7 +27,18 @@ function ExteriorConfiguration({ onSelect, price }) {
     const deltaPrice = getDeltaPrice(selectedComponent);
     setSelectedComponentPrice(deltaPrice);
     setSelectedComponent(selectedComponent);
-    onSelect("exterior", selectedComponent); // Pass the selected option to the parent component
+
+    const selectedDetails = {
+      exterior: {
+        selectedComponent: selectedComponent,
+        selectedComponentPrice: deltaPrice,
+        modelPrice: price,
+        quantity: quantity,
+        finalPrice: quantity * price + deltaPrice,
+      },
+    };
+
+    onSelect(selectedDetails); // Pass the selected details to the parent component
   };
 
   const getDeltaPrice = (component) => {

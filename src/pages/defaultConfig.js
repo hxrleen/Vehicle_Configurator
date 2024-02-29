@@ -51,7 +51,6 @@ function Defaultconfig() {
         .catch((error) =>
           console.error("Error fetching standard features:", error)
         );
-      console.log(standardFeatures);
     };
 
     // Function to fetch standard features
@@ -62,7 +61,6 @@ function Defaultconfig() {
         .catch((error) =>
           console.error("Error fetching core features:", error)
         );
-      console.log(coreFeatures);
     };
 
     // Function to fetch interior features

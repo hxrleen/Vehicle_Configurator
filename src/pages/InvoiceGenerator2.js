@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 import "./InvoiceGenerator.css";
 import "jspdf-autotable";
 
-function InvoiceGenerator({ price, orderSize, modelname }) {
+function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
   const [totalPrice, setTotalPrice] = useState(null);
 
   useEffect(() => {
@@ -17,6 +17,7 @@ function InvoiceGenerator({ price, orderSize, modelname }) {
       setTotalPrice(totalPrice);
     }
   }, [price, orderSize]);
+  console.log(selectedDetails);
 
   const generateAndDownloadPDF = () => {
     const doc = new jsPDF();
@@ -162,7 +163,7 @@ function InvoiceGenerator({ price, orderSize, modelname }) {
                           </td>
                           <td>{price}</td>
                           <td>{orderSize}</td>
-                          <td class="text-end">{price * orderSize}</td>
+                          <td class="text-end">{}</td>
                         </tr>
 
                         <tr>
@@ -193,7 +194,7 @@ function InvoiceGenerator({ price, orderSize, modelname }) {
                             Total
                           </th>
                           <td class="border-0 text-end">
-                            <h4 class="m-0 fw-semibold">{totalPrice}</h4>
+                            <h4 class="m-0 fw-semibold">{}</h4>
                           </td>
                         </tr>
                       </tbody>
@@ -223,4 +224,4 @@ function InvoiceGenerator({ price, orderSize, modelname }) {
   );
 }
 
-export default InvoiceGenerator;
+export default InvoiceGenerator2;

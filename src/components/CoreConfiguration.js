@@ -27,6 +27,18 @@ function CoreConfiguration({ onSelect, price }) {
     const deltaPrice = getDeltaPrice(selectedModel);
     setSelectedModelPrice(deltaPrice);
     setSelectedModel(selectedModel);
+
+    const selectedDetails = {
+      core: {
+        selectedModel: selectedModel,
+        selectedModelPrice: deltaPrice,
+        modelPrice: price,
+        quantity: quantity,
+        finalPrice: quantity * price + deltaPrice,
+      },
+    };
+
+    onSelect(selectedDetails); // Pass the selected details to the parent component
   };
 
   const getDeltaPrice = (model) => {

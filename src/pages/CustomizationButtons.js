@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import InvoiceGenerator from "./InvoiceGenerator";
+import InvoiceGenerator2 from "./InvoiceGenerator2";
 
 function CustomizationButtons({
   onCoreClick,
   onStandardClick,
   onInteriorClick,
   onExteriorClick,
+  selectedDetails,
 }) {
   const navigate = useNavigate();
   const { model_id, quantity } = useParams();
@@ -67,10 +68,11 @@ function CustomizationButtons({
         </button>
       </div>
       {showInvoice && (
-        <InvoiceGenerator
+        <InvoiceGenerator2
           orderSize={quantity}
           price={price}
           modelname={carDetails.modelName}
+          selectedDetails={selectedDetails} // Pass the selected details to InvoiceGenerator
         />
       )}
     </div>

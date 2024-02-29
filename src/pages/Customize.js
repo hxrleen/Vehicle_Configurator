@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./DefaultConfiguration.css";
-import InvoiceGenerator from "./InvoiceGenerator";
+import InvoiceGenerator2 from "./InvoiceGenerator2";
 import CustomizationButtons from "../pages/CustomizationButtons";
 import CoreConfiguration from "../components/CoreConfiguration";
 import StandardConfiguration from "../components/StandardConfiguration";
@@ -34,6 +34,13 @@ function Customize() {
   });
 
   const [price, setPrice] = useState(0);
+  const [selectedDetails, setSelectedDetails] = useState({
+    standard: null,
+    core: null,
+    interior: null,
+    exterior: null,
+    // Add other configurations as needed (core, interior, exterior)
+  });
 
   let navigate = useNavigate();
 
@@ -47,14 +54,17 @@ function Customize() {
     setSelectedConfiguration(configuration);
   };
 
-  const handleOptionSelect = (option, value) => {
+  const handleOptionSelect = (value) => {
     setSelectedOptions((prevOptions) => ({
       ...prevOptions,
-      [selectedConfiguration]: {
-        ...prevOptions[selectedConfiguration],
-        [option]: value,
-      },
+      [selectedConfiguration]: value,
     }));
+
+    // Set selected details
+    setSelectedDetails({
+      ...selectedDetails,
+      [selectedConfiguration]: value,
+    });
   };
 
   useEffect(() => {
@@ -152,6 +162,7 @@ function Customize() {
                   onStandardClick={() => handleConfigurationClick("standard")}
                   onInteriorClick={() => handleConfigurationClick("interior")}
                   onExteriorClick={() => handleConfigurationClick("exterior")}
+                  selectedDetails={selectedDetails}
                 />
               )}
             </div>
@@ -182,10 +193,11 @@ function Customize() {
       </div>
 
       {showInvoice && (
-        <InvoiceGenerator
+        <InvoiceGenerator2
           orderSize={quantity}
           price={price}
           modelname={carDetails.modelName}
+          selectedDetails={selectedDetails} // Pass the selected details to InvoiceGenerator
         />
       )}
     </div>

@@ -45,7 +45,7 @@ function StandardConfiguration({ onSelect, price }) {
 
     setSelectedDetails(selectedDetails);
 
-    onSelect("standard", selectedDetails); // Pass the selected details to the parent component
+    onSelect(selectedDetails); // Pass the selected details to the parent component
   };
 
   const getDeltaPrice = (component) => {

@@ -12,6 +12,7 @@ import Feedback from "./pages/Feedback";
 import Errorpage from "./pages/Errorpage";
 import Footer from "./components/Footer";
 import InvoiceGenerator from "./pages/InvoiceGenerator";
+import InvoiceGenerator2 from "./pages/InvoiceGenerator2";
 import Customize from "./pages/Customize";
 import Defaultconfig from "./pages/Defaultconfig";
 import "./App.css";
@@ -40,6 +41,7 @@ function App() {
             element={<Defaultconfig />}
           />
           <Route path="/InvoiceGenerator" element={<InvoiceGenerator />} />
+          <Route path="/InvoiceGenerator2" element={<InvoiceGenerator2 />} />
         </Routes>
       </div>
       <Footer />
