@@ -85,10 +85,6 @@ function Defaultconfig() {
         );
     };
 
-    const handleConfigure = (event) => {
-      navigate("/configure");
-    };
-
     // Call the functions to fetch data
     fetchStandardFeatures();
     fetchInteriorFeatures();
@@ -141,7 +137,7 @@ function Defaultconfig() {
               ))}
             </ul>
 
-            <h4>Price: {price}</h4>
+            <h4>Price: {carDetails.price}</h4>
 
             <div className="buttons">
               <button onClick={handleConfirmOrder}>Confirm</button>
@@ -158,7 +154,7 @@ function Defaultconfig() {
       {showInvoice && (
         <InvoiceGenerator
           orderSize={quantity}
-          price={price}
+          price={carDetails.price}
           modelname={carDetails.modelName}
         />
       )}

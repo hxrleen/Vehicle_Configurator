@@ -24,7 +24,7 @@ function Home() {
     <div className="home-container">
       <div className="hero-section">
         <video
-          src="./car.mp4"
+          src="../car.mp4"
           alt="Automotive Industry"
           className="hero-video"
           autoPlay

@@ -10,7 +10,7 @@ const ConfiguratorContainer = (props) => {
   const [manufacturers, setManufacturers] = useState([]);
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,6 +73,7 @@ const ConfiguratorContainer = (props) => {
 
   const handleModelChange = (event) => {
     setSelectedModel(event.target.value);
+    setQuantity(8);
   };
 
   const handleGoButtonClick = () => {
@@ -150,7 +151,7 @@ const ConfiguratorContainer = (props) => {
               className="form-control"
               value={quantity}
               onChange={handleQuantityChange}
-              min="1"
+              min="8"
             />
           </div>
           {/* Other dropdowns */}

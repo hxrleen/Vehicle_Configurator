@@ -162,7 +162,7 @@ function InvoiceGenerator({ price, orderSize, modelname }) {
                           </td>
                           <td>{price}</td>
                           <td>{orderSize}</td>
-                          <td class="text-end">{price}</td>
+                          <td class="text-end">{price * orderSize}</td>
                         </tr>
 
                         <tr>
@@ -183,7 +183,9 @@ function InvoiceGenerator({ price, orderSize, modelname }) {
                           <th scope="row" colspan="4" class="border-0 text-end">
                             Tax
                           </th>
-                          <td class="border-0 text-end">Rs {0.1 * price}</td>
+                          <td class="border-0 text-end">
+                            Rs {0.1 * totalPrice}
+                          </td>
                         </tr>
 
                         <tr>

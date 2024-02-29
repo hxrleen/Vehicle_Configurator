@@ -168,16 +168,16 @@ function Customize() {
           alignItems: "center",
         }}>
         {selectedConfiguration === "core" && (
-          <CoreConfiguration onSelect={handleOptionSelect} />
+          <CoreConfiguration onSelect={handleOptionSelect} price={price} />
         )}
         {selectedConfiguration === "standard" && (
-          <StandardConfiguration onSelect={handleOptionSelect} />
+          <StandardConfiguration onSelect={handleOptionSelect} price={price} />
         )}
         {selectedConfiguration === "interior" && (
-          <InteriorConfiguration onSelect={handleOptionSelect} />
+          <InteriorConfiguration onSelect={handleOptionSelect} price={price} />
         )}
         {selectedConfiguration === "exterior" && (
-          <ExteriorConfiguration onSelect={handleOptionSelect} />
+          <ExteriorConfiguration onSelect={handleOptionSelect} price={price} />
         )}
       </div>
 
