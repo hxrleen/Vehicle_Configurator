@@ -27,18 +27,6 @@ function CoreConfiguration({ onSelect, price }) {
     const deltaPrice = getDeltaPrice(selectedModel);
     setSelectedModelPrice(deltaPrice);
     setSelectedModel(selectedModel);
-
-    const selectedDetails = {
-      core: {
-        selectedModel: selectedModel,
-        selectedModelPrice: deltaPrice,
-        modelPrice: price,
-        quantity: quantity,
-        finalPrice: quantity * price + deltaPrice,
-      },
-    };
-
-    onSelect(selectedDetails); // Pass the selected details to the parent component
   };
 
   const getDeltaPrice = (model) => {
@@ -80,7 +68,7 @@ function CoreConfiguration({ onSelect, price }) {
         <p>Model Price: {price}</p>
         <p>Quantity: {quantity}</p>
         <p>
-          Final Price:{quantity * price + selectedModelPrice}
+          Final Price:{quantity * price + selectedModel}
           {/* Calculate the final price based on selected model's delta price and other factors */}
         </p>
       </div>
