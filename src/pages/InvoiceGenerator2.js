@@ -6,7 +6,12 @@ import "jspdf-autotable";
 
 function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
   const [totalPrice, setTotalPrice] = useState(null);
-
+  const finalObj=sessionStorage.getItem("selectedData");
+  const finalOb=JSON.parse(finalObj);
+  const singlePrice=finalOb.selectedModelPrice;
+  const gprice = finalOb.price;
+  const config = finalOb.selectedModel;
+  
   useEffect(() => {
     // Calculate total price based on order size and model price
     if (price !== null && orderSize !== null) {
@@ -18,6 +23,8 @@ function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
     }
   }, [price, orderSize]);
   console.log(selectedDetails);
+
+  console.log(finalObj.selectedModel);
 
   const generateAndDownloadPDF = () => {
     const doc = new jsPDF();
@@ -77,6 +84,19 @@ function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
     // Navigate or perform additional actions if needed
   };
 
+  // getting current date from the system
+
+  const currentDate = new Date();
+
+  // Extract the date, month, and year
+  const day = currentDate.getDate();
+  const month = currentDate.getMonth() + 1; // Months are zero-indexed, so we add 1
+  const year = currentDate.getFullYear();
+
+  // Format the date as a string
+  const formattedDate = `${day < 10 ? '0' + day : day} - ${month < 10 ? '0' + month : month} - ${year}`;
+
+
   return (
     <div style={{ fontFamily: "Arial, sans-serif" }}>
       <h1 style={{ textAlign: "center" }}>Invoice</h1>
@@ -126,7 +146,7 @@ function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
                       </div>
                       <div class="mt-4">
                         <h5 class="font-size-15 mb-1">Invoice Date:</h5>
-                        <p>29 Feb, 2024</p>
+                        <p>{formattedDate}</p>
                       </div>
                       <div class="mt-4">
                         <h5 class="font-size-15 mb-1">Order No:</h5>
@@ -147,6 +167,7 @@ function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
                         <tr>
                           <th>No.</th>
                           <th>Item</th>
+                          <th>Configuration</th>
                           <th>Price</th>
                           <th>Quantity</th>
                           <th class="text-end">Total</th>
@@ -161,16 +182,22 @@ function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
                               <p class="text-muted mb-0"> {modelname}</p>
                             </div>
                           </td>
-                          <td>{price}</td>
+                          <td>
+                            <div>
+                            <h5 class="text-truncate font-size-14 mb-1"></h5>
+                              <p class="text-muted mb-0"> {config}</p>
+                            </div>
+                          </td>
+                          <td>{price=(gprice+singlePrice)}</td>
                           <td>{orderSize}</td>
-                          <td class="text-end">{}</td>
+                          <td class="text-end">{price*orderSize}</td>
                         </tr>
 
                         <tr>
                           <th scope="row" colspan="4" class="border-0 text-end">
                             Discount :
                           </th>
-                          <td class="border-0 text-end">- Rs 00.00</td>
+                          <td class="border-0 text-end"> Rs 00.00</td>
                         </tr>
 
                         <tr>
@@ -185,7 +212,7 @@ function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
                             Tax
                           </th>
                           <td class="border-0 text-end">
-                            Rs {0.1 * totalPrice}
+                            Rs {0.1 * price}
                           </td>
                         </tr>
 
@@ -194,14 +221,16 @@ function InvoiceGenerator2({ price, orderSize, modelname, selectedDetails }) {
                             Total
                           </th>
                           <td class="border-0 text-end">
-                            <h4 class="m-0 fw-semibold">{}</h4>
+                            <h4 class="m-0 fw-semibold">{(price*orderSize)+(0.1 * price)}</h4>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
+                
               </div>
+              
             </div>
           </div>
         </div>

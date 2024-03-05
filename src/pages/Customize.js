@@ -108,7 +108,7 @@ function Customize() {
         .then((data) => setPrice(data))
         .catch((error) => console.error("Error fetching price:", error));
     };
-
+console.log(selectedDetails);
     fetchStandardFeatures();
     fetchInteriorFeatures();
     fetchCarDetails();
